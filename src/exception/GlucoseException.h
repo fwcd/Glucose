@@ -4,8 +4,8 @@
  *  Created on: 08.02.2018
  */
 
-#ifndef MATH_GLUCOSEEXCEPTION_H_
-#define MATH_GLUCOSEEXCEPTION_H_
+#ifndef EXCEPTION_GLUCOSEEXCEPTION_H_
+#define EXCEPTION_GLUCOSEEXCEPTION_H_
 
 #include <stdexcept>
 #include <string>
@@ -21,4 +21,4 @@ public:
 
 } /* namespace glucose */
 
-#endif /* MATH_GLUCOSEEXCEPTION_H_ */
+#endif /* EXCEPTION_GLUCOSEEXCEPTION_H_ */
