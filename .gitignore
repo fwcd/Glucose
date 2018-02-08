@@ -1,0 +1,6 @@
+.settings/
+.classpath
+.idea/
+bin/
+Debug/
+Release/
