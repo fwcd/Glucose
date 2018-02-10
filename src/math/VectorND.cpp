@@ -7,6 +7,7 @@
 #include "VectorND.h"
 
 #include <cmath>
+#include <iostream>
 
 #include "../exception/GlucoseException.h"
 
@@ -21,22 +22,22 @@ VectorND::VectorND(const VectorND& other) {
 }
 
 VectorND::VectorND(const std::vector<double>& values) {
-	data = &values;
+	data = new std::vector<double>(values);
 }
 
 VectorND::~VectorND() {
 	delete data;
 }
 
-VectorND::Ptr VectorND::operator +(const VectorND& other) {
+VectorND VectorND::operator +(const VectorND& other) {
 	return combine(other, [](double a, double b) -> double { return a + b; });
 }
 
-VectorND::Ptr VectorND::operator -(const VectorND& other) {
+VectorND VectorND::operator -(const VectorND& other) {
 	return combine(other, [](double a, double b) -> double { return a - b; });
 }
 
-VectorND::Ptr VectorND::operator *(double factor) {
+VectorND VectorND::operator *(double factor) {
 	return map([factor](double x) -> double { return x * factor; });
 }
 
@@ -57,13 +58,13 @@ bool glucose::VectorND::operator ==(const VectorND& other) {
 	return true;
 }
 
-VectorND::Ptr VectorND::with(int index, double value) {
-	std::vector<double>* result = new std::vector<double>(size());
-	(*result)[index] = value;
-	return VectorND::Ptr(new VectorND(*result));
+VectorND VectorND::with(int index, double value) {
+	std::vector<double> result(size());
+	result[index] = value;
+	return VectorND(result);
 }
 
-VectorND::Ptr VectorND::normalize() {
+VectorND VectorND::normalize() {
 	double len = length();
 	return map([len](double x) -> double { return x / len; });
 }
@@ -80,27 +81,27 @@ double VectorND::dot(const VectorND& other) {
 	return result;
 }
 
-VectorND::Ptr VectorND::map(std::function<double(double)> mapper) {
+VectorND VectorND::map(std::function<double(double)> mapper) {
 	int s = size();
-	std::vector<double>* mapped = new std::vector<double>(s);
+	std::vector<double> mapped(s);
 
 	for (int i=0; i<s; i++) {
-		(*mapped)[i] = mapper((*data)[i]);
+		mapped[i] = mapper((*data)[i]);
 	}
 
-	return VectorND::Ptr(new VectorND(*mapped));
+	return VectorND(mapped);
 }
 
-VectorND::Ptr VectorND::combine(const VectorND& other, std::function<double(double, double)> combiner) {
+VectorND VectorND::combine(const VectorND& other, std::function<double(double, double)> combiner) {
 	int s = size();
 	assertEqualSize(s, other);
-	std::vector<double>* combined = new std::vector<double>(s);
+	std::vector<double> combined(s);
 
 	for (int i=0; i<s; i++) {
-		(*combined)[i] = combiner((*data)[i], (*other.data)[i]);
+		combined[i] = combiner((*data)[i], (*other.data)[i]);
 	}
 
-	return VectorND::Ptr(new VectorND(*combined));
+	return VectorND(combined);
 }
 
 double VectorND::reduce(std::function<double(double, double)> associativeAccumulator) {

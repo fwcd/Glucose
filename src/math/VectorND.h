@@ -20,27 +20,25 @@ namespace glucose {
  */
 class VectorND {
 public:
-	typedef std::shared_ptr<VectorND> Ptr;
-
 	explicit VectorND(std::initializer_list<double> values);
 
-	explicit VectorND(const VectorND& other);
+	VectorND(const VectorND& other);
 
 	virtual ~VectorND();
 
-	VectorND::Ptr operator +(const VectorND& other);
+	VectorND operator +(const VectorND& other);
 
-	VectorND::Ptr operator -(const VectorND& other);
+	VectorND operator -(const VectorND& other);
 
-	VectorND::Ptr operator *(double factor);
+	VectorND operator *(double factor);
 
 	const double operator [](int index);
 
 	bool operator ==(const VectorND& other);
 
-	VectorND::Ptr with(int index, double value);
+	VectorND with(int index, double value);
 
-	VectorND::Ptr normalize();
+	VectorND normalize();
 
 	double dot(const VectorND& other);
 
@@ -48,9 +46,9 @@ public:
 
 	int size() const;
 
-	VectorND::Ptr map(std::function<double(double)> mapper);
+	VectorND map(std::function<double(double)> mapper);
 
-	VectorND::Ptr combine(const VectorND& other, std::function<double(double, double)> combiner);
+	VectorND combine(const VectorND& other, std::function<double(double, double)> combiner);
 
 	double reduce(std::function<double(double, double)> associativeAccumulator);
 
