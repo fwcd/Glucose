@@ -10,9 +10,9 @@
 #include <iostream>
 #include <string>
 
-#include "exception/NoSuchElementException.h"
-#include "math/VectorND.h"
-#include "structs/Optional.h"
+#include "../include/exception/NoSuchElementException.hpp"
+#include "../include/math/VectorND.hpp"
+#include "../include/structs/Optional.hpp"
 
 using namespace glucose;
 

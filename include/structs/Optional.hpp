@@ -1,17 +1,17 @@
 /*
- * Optional.h
+ * Optional.hpp
  *
  *  Created on: 10.02.2018
  */
 
-#ifndef STRUCTS_OPTIONAL_H_
-#define STRUCTS_OPTIONAL_H_
+#ifndef STRUCTS_OPTIONAL_HPP_
+#define STRUCTS_OPTIONAL_HPP_
 
 #include <functional>
 #include <sstream>
 #include <string>
 
-#include "../exception/NoSuchElementException.h"
+#include "../exception/NoSuchElementException.hpp"
 
 namespace glucose {
 
@@ -75,4 +75,4 @@ private:
 
 } /* namespace glucose */
 
-#endif /* STRUCTS_OPTIONAL_H_ */
+#endif /* STRUCTS_OPTIONAL_HPP_ */
