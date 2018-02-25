@@ -10,8 +10,8 @@
 #include <string>
 #include <vector>
 
-#ifndef MATH_VECTORND_H_
-#define MATH_VECTORND_H_
+#ifndef MATH_VECTORND_HPP_
+#define MATH_VECTORND_HPP_
 
 namespace glucose {
 
@@ -172,4 +172,4 @@ private:
 
 } /* namespace glucose */
 
-#endif /* MATH_VECTORND_H_ */
+#endif /* MATH_VECTORND_HPP_ */
