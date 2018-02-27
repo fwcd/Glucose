@@ -7,6 +7,7 @@
  *  Created on: 07.02.2018
  */
 
+#include <cstdlib>
 #include <iostream>
 #include <string>
 
@@ -19,7 +20,9 @@ using namespace glucose;
 int main() {
 	std::cout << "\n==== Double vector testing ====\n\n";
 
-	Vec<3> a({1, 2, 3});
+	double v = 9;
+
+	Vec<3> a({v, v, v});
 	Vec<3, double> b({4, 5, 6}); // Equivalent to the type above
 
 	std::cout << "Adding:\t\t" << (a + b).toString() << "\n";
@@ -33,16 +36,15 @@ int main() {
 
 	std::cout << "\n==== Optional testing ====\n\n";
 
-	int v = 5;
-	Optional<int> emptyInt;
-	Optional<int> filledInt(&v);
+	Optional<double> emptyOpt;
+	Optional<double> filledOpt(&v);
 
-	std::cout << "Empty:\t\t" << emptyInt.toString() << "\n";
-	std::cout << "Filled:\t\t" << filledInt.toString() << "\n";
-	std::cout << "Unwrapped:\t" << *filledInt << "\n";
+	std::cout << "Empty:\t\t" << emptyOpt.toString() << "\n";
+	std::cout << "Filled:\t\t" << filledOpt.toString() << "\n";
+	std::cout << "Unwrapped:\t" << *filledOpt << "\n";
 
 	try {
-		*emptyInt;
+		*emptyOpt;
 	} catch (const NoSuchElementException& e) {
 		std::cout << "Whoops, almost tried to dereference an empty optional.\n";
 	}
