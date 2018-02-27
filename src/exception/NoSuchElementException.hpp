@@ -7,7 +7,7 @@
 #ifndef EXCEPTION_NOSUCHELEMENTEXCEPTION_HPP_
 #define EXCEPTION_NOSUCHELEMENTEXCEPTION_HPP_
 
-#include "GlucoseException.hpp"
+#include "../../src/exception/GlucoseException.hpp"
 
 namespace glucose {
 

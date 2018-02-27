@@ -1,4 +1,4 @@
-/*
+ /*
  * GlucoseTest.cpp
  *
  * Contains a main method for the purpose of experimentation.
@@ -10,9 +10,9 @@
 #include <iostream>
 #include <string>
 
-#include "../include/exception/NoSuchElementException.hpp"
-#include "../include/math/VectorND.hpp"
-#include "../include/structs/Optional.hpp"
+#include "../src/exception/NoSuchElementException.hpp"
+#include "../src/math/VectorND.hpp"
+#include "../src/structs/Optional.hpp"
 
 using namespace glucose;
 

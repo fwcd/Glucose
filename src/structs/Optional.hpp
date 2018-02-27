@@ -11,7 +11,7 @@
 #include <sstream>
 #include <string>
 
-#include "../exception/NoSuchElementException.hpp"
+#include "../../src/exception/NoSuchElementException.hpp"
 
 namespace glucose {
 
