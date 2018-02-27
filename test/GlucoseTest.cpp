@@ -11,16 +11,16 @@
 #include <string>
 
 #include "../src/exception/NoSuchElementException.hpp"
-#include "../src/math/VectorND.hpp"
+#include "../src/math/Vec.hpp"
 #include "../src/structs/Optional.hpp"
 
 using namespace glucose;
 
 int main() {
-	std::cout << "\n==== VectorND testing ====\n\n";
+	std::cout << "\n==== Double vector testing ====\n\n";
 
-	VectorND a({1, 2, 3});
-	VectorND b({4, 5, 6});
+	Vec<3> a({1, 2, 3});
+	Vec<3, double> b({4, 5, 6}); // Equivalent to the type above
 
 	std::cout << "Adding:\t\t" << (a + b).toString() << "\n";
 	std::cout << "Subtracting:\t" << (a - b).toString() << "\n";
