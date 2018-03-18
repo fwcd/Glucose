@@ -1,4 +1,4 @@
 # Glucose
 A small, general-purpose, header-only C++ library.
 
-Please note that this project only serves as a learning exercise and thus is not suited for production usage.
+Please note that this project is still in an early stage of development and thus is not (yet) suited for production usage.

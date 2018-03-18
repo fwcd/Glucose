@@ -7,6 +7,7 @@
 #include <cmath>
 #include <functional>
 #include <initializer_list>
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -21,15 +22,15 @@ namespace glucose {
 template <int SIZE, typename T = double> class Vec {
 public:
 	explicit Vec(std::initializer_list<T> values) {
-		data = new std::vector<T>(values);
+		data = std::unique_ptr<std::vector<T>>(new std::vector<T>(values));
 	}
 
 	Vec(const Vec<SIZE, T>& other) {
-		data = new std::vector<T>(*other.data);
+		data = std::unique_ptr<std::vector<T>>(new std::vector<T>(*other.data));
 	}
 
 	virtual ~Vec() {
-		delete data;
+
 	}
 
 	Vec<SIZE, T> operator +(const Vec<SIZE, T>& other) {
@@ -134,7 +135,7 @@ public:
 		std::string str;
 		str += "[";
 
-		for (T component : (*data)) {
+		for (const T& component : (*data)) {
 			str += std::to_string(component) + ", ";
 		}
 
@@ -143,10 +144,10 @@ public:
 		return str;
 	}
 private:
-	const std::vector<T>* data;
+	std::unique_ptr<std::vector<T>> data;
 
 	explicit Vec(const std::vector<T>& values) {
-		data = new std::vector<T>(values);
+		data = std::unique_ptr<std::vector<T>>(new std::vector<T>(values));
 	}
 };
 

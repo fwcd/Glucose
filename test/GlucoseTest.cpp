@@ -7,17 +7,25 @@
  *  Created on: 07.02.2018
  */
 
-#include <cstdlib>
 #include <iostream>
 #include <string>
 
 #include "../src/exception/NoSuchElementException.hpp"
 #include "../src/math/Vec.hpp"
+#include "../src/misc/BitSequence.hpp"
 #include "../src/structs/Optional.hpp"
 
 using namespace glucose;
 
 int main() {
+	std::cout << "\n==== Bit sequence testing ====\n\n";
+
+	BitSequence seq;
+	for (int i=0; i<100; i++) {
+		++seq;
+		std::cout << seq.toString() << "\n";
+	}
+
 	std::cout << "\n==== Double vector testing ====\n\n";
 
 	double v = 9;
