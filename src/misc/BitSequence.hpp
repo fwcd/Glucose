@@ -1,5 +1,5 @@
 /*
- * ByteSequence.hpp
+ * BitSequence.hpp
  *
  *  Created on: 11.03.2018
  */
