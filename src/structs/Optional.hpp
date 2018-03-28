@@ -11,7 +11,7 @@
 #include <sstream>
 #include <string>
 
-#include "../../src/exception/NoSuchElementException.hpp"
+#include "../exception/NoSuchElementException.hpp"
 
 namespace glucose {
 
@@ -21,11 +21,19 @@ namespace glucose {
 template <typename T> class Optional {
 public:
 	Optional() {
-		item = NULL;
+		item = 0;
 	}
 
-	Optional(T* obj) {
-		item = obj;
+	Optional(const T& obj) {
+		item = new T(obj);
+	}
+
+	Optional(const T& obj, bool performCopy) {
+		if (performCopy) {
+			item = new T(obj);
+		} else {
+			item = &obj;
+		}
 	}
 
 	virtual ~Optional() {
@@ -37,12 +45,12 @@ public:
 	/**
 	 * Maps the optional.
 	 */
-	template <typename R> Optional<R> map(std::function<R*(T)> mapper) {
+	template <typename R> Optional<R> map(std::function<R(T)> mapper) {
 		return Optional<R>(mapper(*item));
 	}
 
 	bool isPresent() {
-		return item;
+		return item != 0;
 	}
 
 	const T& orElse(const T& other) {

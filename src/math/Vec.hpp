@@ -22,11 +22,11 @@ namespace glucose {
 template <int SIZE, typename T = double> class Vec {
 public:
 	explicit Vec(std::initializer_list<T> values) {
-		data = std::unique_ptr<std::vector<T>>(new std::vector<T>(values));
+		data = std::vector<T>(values);
 	}
 
 	Vec(const Vec<SIZE, T>& other) {
-		data = std::unique_ptr<std::vector<T>>(new std::vector<T>(*other.data));
+		data = std::vector<T>(other.data);
 	}
 
 	virtual ~Vec() {
@@ -46,13 +46,13 @@ public:
 	}
 
 	const double operator [](int index) {
-		return (*data)[index];
+		return data[index];
 	}
 
 	bool operator ==(const Vec<SIZE, T>& other) {
 		for (int i=0; i<SIZE; i++) {
 			// TODO: Implement tolerance to deal with floating point inaccuracies
-			if ((*data)[i] != (*other.data)[i]) {
+			if (data[i] != other.data[i]) {
 				return false;
 			}
 		}
@@ -75,7 +75,7 @@ public:
 		T result = 0;
 
 		for (int i=0; i<SIZE; i++) {
-			result += (*data)[i] * (*other.data)[i];
+			result += data[i] * other.data[i];
 		}
 
 		return result;
@@ -88,7 +88,7 @@ public:
 	double length() {
 		double length = 0;
 
-		for (double component : (*data)) {
+		for (double component : data) {
 			length += component * component;
 		}
 
@@ -99,7 +99,7 @@ public:
 		std::vector<T> mapped(SIZE);
 
 		for (int i=0; i<SIZE; i++) {
-			mapped[i] = mapper((*data)[i]);
+			mapped[i] = mapper(data[i]);
 		}
 
 		return Vec<SIZE, T>(mapped);
@@ -109,33 +109,33 @@ public:
 		std::vector<T> combined(SIZE);
 
 		for (int i=0; i<SIZE; i++) {
-			combined[i] = combiner((*data)[i], (*other.data)[i]);
+			combined[i] = combiner(data[i], other.data[i]);
 		}
 
 		return Vec<SIZE, T>(combined);
 	}
 
 	T reduce(std::function<T(T, T)> associativeAccumulator) {
-		T reduced = (*data)[0];
+		T reduced = data[0];
 
 		for (int i=1; i<SIZE; i++) {
-			reduced = associativeAccumulator(reduced, (*data)[i]);
+			reduced = associativeAccumulator(reduced, data[i]);
 		}
 
 		return reduced;
 	}
 
-	const T getX() { return (*data)[0]; }
+	const T getX() { return data[0]; }
 
-	const T getY() { return (*data)[1]; }
+	const T getY() { return data[1]; }
 
-	const T getZ() { return (*data)[2]; }
+	const T getZ() { return data[2]; }
 
 	std::string toString() {
 		std::string str;
 		str += "[";
 
-		for (const T& component : (*data)) {
+		for (const T& component : data) {
 			str += std::to_string(component) + ", ";
 		}
 
@@ -144,10 +144,10 @@ public:
 		return str;
 	}
 private:
-	std::unique_ptr<std::vector<T>> data;
+	std::vector<T> data;
 
 	explicit Vec(const std::vector<T>& values) {
-		data = std::unique_ptr<std::vector<T>>(new std::vector<T>(values));
+		data = std::vector<T>(values);
 	}
 };
 

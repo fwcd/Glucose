@@ -18,13 +18,14 @@
 using namespace glucose;
 
 int main() {
+	std::cout << "Version: " << __cplusplus << "\n";
 	std::cout << "\n==== Bit sequence testing ====\n\n";
 
 	BitSequence seq;
 	for (int i=0; i<100; i++) {
 		++seq;
-		std::cout << seq.toString() << "\n";
 	}
+	std::cout << seq.toString() << "\n";
 
 	std::cout << "\n==== Double vector testing ====\n\n";
 
@@ -45,7 +46,7 @@ int main() {
 	std::cout << "\n==== Optional testing ====\n\n";
 
 	Optional<double> emptyOpt;
-	Optional<double> filledOpt(&v);
+	Optional<double> filledOpt(v);
 
 	std::cout << "Empty:\t\t" << emptyOpt.toString() << "\n";
 	std::cout << "Filled:\t\t" << filledOpt.toString() << "\n";
