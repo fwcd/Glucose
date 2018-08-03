@@ -14,6 +14,12 @@ namespace glucose {
  * An immutable, n-dimensional (numerical) vector.
  */
 template <int SIZE, typename T = double> class Vec {
+private:
+	std::vector<T> data;
+
+	explicit Vec(const std::vector<T>& values) {
+		data = std::vector<T>(values);
+	}
 public:
 	explicit Vec(std::initializer_list<T> values) {
 		data = std::vector<T>(values);
@@ -27,23 +33,23 @@ public:
 
 	}
 
-	Vec<SIZE, T> operator +(const Vec<SIZE, T>& other) {
+	Vec<SIZE, T> operator+(const Vec<SIZE, T>& other) {
 		return combine(other, [](T a, T b) -> T { return a + b; });
 	}
 
-	Vec<SIZE, T> operator -(const Vec<SIZE, T>& other) {
+	Vec<SIZE, T> operator-(const Vec<SIZE, T>& other) {
 		return combine(other, [](T a, T b) -> T { return a - b; });
 	}
 
-	Vec<SIZE, T> operator *(double factor) {
+	Vec<SIZE, T> operator*(double factor) {
 		return map([factor](T x) -> T { return x * factor; });
 	}
 
-	const double operator [](int index) {
+	const double operator[](int index) {
 		return data[index];
 	}
 
-	bool operator ==(const Vec<SIZE, T>& other) {
+	bool operator==(const Vec<SIZE, T>& other) {
 		for (int i=0; i<SIZE; i++) {
 			// TODO: Implement tolerance to deal with floating point inaccuracies
 			if (data[i] != other.data[i]) {
@@ -136,12 +142,6 @@ public:
 		str.erase(str.length() - 2, 2);
 		str += "]";
 		return str;
-	}
-private:
-	std::vector<T> data;
-
-	explicit Vec(const std::vector<T>& values) {
-		data = std::vector<T>(values);
 	}
 };
 

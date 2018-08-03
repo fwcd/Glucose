@@ -9,6 +9,8 @@
 
 #define INT_BITS std::numeric_limits<unsigned int>::digits
 
+namespace glucose {
+
 /**
  * A bit sequence stored in big endian notation.
  */
@@ -32,5 +34,7 @@ public:
 
 	std::string toString();
 };
+
+}
 
 #endif /* GLUCOSE_BIT_SEQUENCE_HPP */

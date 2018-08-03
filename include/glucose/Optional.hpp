@@ -13,6 +13,8 @@ namespace glucose {
  * Immutable optional type.
  */
 template <typename T> class Optional {
+private:
+	T* item;
 public:
 	Optional() {
 		item = 0;
@@ -71,8 +73,6 @@ public:
 			return "Empty optional";
 		}
 	}
-private:
-	T* item;
 };
 
 } /* namespace glucose */

@@ -1,5 +1,7 @@
 #include "glucose/BitSequence.hpp"
 
+namespace glucose {
+
 BitSequence::BitSequence() {
 	data = std::vector<unsigned int>({0});
 	usedBits = 1;
@@ -63,4 +65,6 @@ std::string BitSequence::toString() {
 	}
 
 	return stream.str();
+}
+
 }
