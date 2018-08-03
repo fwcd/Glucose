@@ -1,17 +1,11 @@
-/*
- * Optional.hpp
- *
- *  Created on: 10.02.2018
- */
-
-#ifndef STRUCTS_OPTIONAL_HPP_
-#define STRUCTS_OPTIONAL_HPP_
+#ifndef GLUCOSE_OPTIONAL_HPP
+#define GLUCOSE_OPTIONAL_HPP
 
 #include <functional>
 #include <sstream>
 #include <string>
 
-#include "../exception/NoSuchElementException.hpp"
+#include "NoSuchElementException.hpp"
 
 namespace glucose {
 
@@ -83,4 +77,4 @@ private:
 
 } /* namespace glucose */
 
-#endif /* STRUCTS_OPTIONAL_HPP_ */
+#endif /* GLUCOSE_OPTIONAL_HPP */

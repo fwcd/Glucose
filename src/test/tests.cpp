@@ -10,10 +10,10 @@
 #include <iostream>
 #include <string>
 
-#include "../src/exception/NoSuchElementException.hpp"
-#include "../src/math/Vec.hpp"
-#include "../src/misc/BitSequence.hpp"
-#include "../src/structs/Optional.hpp"
+#include "glucose/NoSuchElementException.hpp"
+#include "glucose/Vec.hpp"
+#include "glucose/BitSequence.hpp"
+#include "glucose/Optional.hpp"
 
 using namespace glucose;
 

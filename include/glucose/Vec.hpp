@@ -1,8 +1,5 @@
-/*
- * VectorND.hpp
- *
- *  Created on: 07.02.2018
- */
+#ifndef GLUCOSE_VEC_HPP
+#define GLUCOSE_VEC_HPP
 
 #include <cmath>
 #include <functional>
@@ -10,9 +7,6 @@
 #include <memory>
 #include <string>
 #include <vector>
-
-#ifndef MATH_VEC_HPP_
-#define MATH_VEC_HPP_
 
 namespace glucose {
 
@@ -153,4 +147,4 @@ private:
 
 } /* namespace glucose */
 
-#endif /* MATH_VEC_HPP_ */
+#endif /* GLUCOSE_VEC_HPP */
