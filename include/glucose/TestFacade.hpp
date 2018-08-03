@@ -13,21 +13,33 @@ private:\
 	std::string name;\
 public:\
 	TEST_BASE_NAME ## Test() : name(#TEST_BASE_NAME) {}\
-	virtual void run(TestResult& result);\
+	virtual void run(TestResult& unitTestResult);\
 	virtual std::string getName() { return name; }\
 };\
 void TEST_BASE_NAME ## Test::run(TestResult& unitTestResult)
 
-#define fail(MSG) unitTestResult.fail(MSG); return
-#define pass(MSG) unitTestResult.pass(MSG); return
-#define assertTrue(EXPECTED, ACTUAL)\
-	if (!ACTUAL) fail("Expected true but was false")
-#define assertFalse(EXPECTED, ACTUAL)\
-	if (ACTUAL) fail("Expected false but was true")
+#define fail(MSG) unitTestResult.failTest(MSG); return
+#define pass(MSG) unitTestResult.passTest(MSG); return
+
+/** Asserts that a boolean value is true */
+#define assertTrue(ACTUAL)\
+	if (!ACTUAL) unitTestResult.failTest("Expected true but was false")
+
+/** Asserts that a boolean value is false */
+#define assertFalse(ACTUAL)\
+	if (ACTUAL) unitTestResult.failTest("Expected false but was true")
+
+/** Asserts that two numbers are exactly equal */
 #define assertNumEq(EXPECTED, ACTUAL)\
-	if (EXPECTED != ACTUAL) fail("Expected int " + std::to_string(EXPECTED) + " but was " + std::to_string(ACTUAL))
+	if (EXPECTED != ACTUAL) unitTestResult.failTest("Expected number " + std::to_string(EXPECTED) + " but was " + std::to_string(ACTUAL))
+
+/** Asserts that two floating point numbers are equal within a given tolerance */
+#define assertFpEq(EXPECTED, ACTUAL, TOLERANCE)\
+	if (std::abs(EXPECTED - ACTUAL) > TOLERANCE) unitTestResult.failTest("Expected number " + std::to_string(EXPECTED) + " but was " + std::to_string(ACTUAL))
+	
+/** Asserts that two strings are equal */
 #define assertStrEq(EXPECTED, ACTUAL)\
-	if (EXPECTED != ACTUAL) fail("Expected string " + EXPECTED + " but was " + ACTUAL)
+	if (EXPECTED != ACTUAL) unitTestResult.failTest("Expected string " + EXPECTED + " but was " + ACTUAL)
 
 }
 

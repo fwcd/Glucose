@@ -16,9 +16,9 @@ public:
 	
 	virtual ~TestResult();
 	
-	void fail(const std::string& message);
+	void failTest(std::string message);
 	
-	void pass(const std::string& message);
+	void passTest(std::string message);
 	
 	bool hasFailed();
 	

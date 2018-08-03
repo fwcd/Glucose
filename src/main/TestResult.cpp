@@ -9,13 +9,13 @@ TestResult::TestResult() {
 
 TestResult::~TestResult() {}
 
-void TestResult::fail(const std::string& message) {
+void TestResult::failTest(std::string message) {
 	failed = true;
 	messagePresent = true;
 	this->message = message;
 }
 
-void TestResult::pass(const std::string& message) {
+void TestResult::passTest(std::string) {
 	failed = false;
 	messagePresent = true;
 	this->message = message;
