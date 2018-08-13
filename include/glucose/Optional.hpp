@@ -25,21 +25,48 @@ public:
 	
 	virtual ~Optional() {}
 
-	/**
-	 * Maps the optional.
-	 */
+	/** Returns the mapped value if present */
 	template <typename R> Optional<R> map(std::function<R(T)> mapper) {
 		if (present) {
 			return Optional<R>(mapper(item));
 		} else return Optional<R>();
 	}
 
+	/** Returns a mapped value if this and the returned optional are present */
+	template <typename R> Optional<R> flatMap(std::function<Optional<R>(T)> mapper) {
+		if (present) {
+			Optional<R> mapped = mapper(item);
+			if (mapped.present) {
+				return Optional<R>(mapped.item);
+			}
+		}
+		return Optional<R>();
+	}
+
 	bool isPresent() {
 		return present;
 	}
+	
+	Optional<T> orOptional(const Optional<T>& other) {
+		if (present) {
+			// Return a value-copy of this optional
+			return *this;
+		} else {
+			return other;
+		}
+	}
+	
+	Optional<T> orOptionalGet(std::function<Optional<T>(void)> other) {
+		if (present) {
+			// Return a value-copy of this optional
+			return *this;
+		} else {
+			return other();
+		}
+	}
 
-	T orElseGet(std::function<T(void)> getter) {
-		return present ? item : getter();
+	T orElseGet(std::function<T(void)> other) {
+		return present ? item : other();
 	}
 
 	T orElse(T other) {

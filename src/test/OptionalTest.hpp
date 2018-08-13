@@ -15,15 +15,18 @@ TEST(Optional) {
 	
 	Optional<double> emptyOpt;
 	Optional<double> filledOpt(v);
+	Optional<double> wrappedThirty(30);
 	
 	assertFalse(emptyOpt.isPresent());
 	assertFalse(emptyOpt.map<double>([](auto x) { return x * 2; }).isPresent());
 	assertTrue(filledOpt.isPresent());
-	assertFpEq(50, *(filledOpt.map<double>([](auto x) { return x * 2.5; })), tolerance);
+	assertFpEq(50, *filledOpt.map<double>([](auto x) { return x * 2.5; }), tolerance);
 	assertFpEq(20, *filledOpt, tolerance);
 	assertFpEq(10, emptyOpt.orElseRef(ten), tolerance);
 	assertFpEq(10, emptyOpt.orElse(10), tolerance);
 	assertFpEq(10, emptyOpt.orElseGet([] { return 10; }), tolerance);
+	assertFpEq(30, *wrappedThirty.orOptional(emptyOpt), tolerance);
+	assertFpEq(45, *emptyOpt.orOptional(Optional<double>(45)), tolerance);
 }
 
 #endif // GLUCOSE_OPTIONAL_TEST_H
