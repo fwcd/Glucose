@@ -10,67 +10,42 @@
 namespace glucose {
 
 /**
- * Immutable optional type.
+ * Immutable optional type. Note that the current implementation
+ * of Optional uses a default constructed instance of T when
+ * the value is not present.
  */
 template <typename T> class Optional {
 private:
-	T* item;
+	bool present;
+	T item;
 public:
-	Optional() {
-		item = 0;
-	}
+	Optional() : present(false) {}
 
-	Optional(const T& obj) {
-		item = new T(obj);
-	}
-
-	Optional(const T& obj, bool performCopy) {
-		if (performCopy) {
-			item = new T(obj);
-		} else {
-			item = &obj;
-		}
-	}
-
-	virtual ~Optional() {
-		if (isPresent()) { // Only call delete if item is not null already
-			delete item;
-		}
-	}
+	Optional(T obj) : item(obj), present(true) {}
+	
+	virtual ~Optional() {}
 
 	/**
 	 * Maps the optional.
 	 */
 	template <typename R> Optional<R> map(std::function<R(T)> mapper) {
-		return Optional<R>(mapper(*item));
+		return Optional<R>(mapper(item));
 	}
 
 	bool isPresent() {
-		return item != 0;
+		return present;
 	}
 
 	const T& orElse(const T& other) {
-		return isPresent() ? (*item) : other;
+		return present ? item : other;
 	}
 
-	/**
-	 * Unwraps the optional.
-	 */
-	const T& operator *() {
+	/** Unwraps the optional. */
+	const T& operator*() {
 		if (isPresent()) {
-			return *item;
+			return item;
 		} else {
 			throw NoSuchElementException("Tried to unwrap empty optional");
-		}
-	}
-
-	std::string toString() {
-		if (isPresent()) {
-			std::ostringstream address;
-			address << static_cast<const void*>(item);
-			return "Optional pointing to " + address.str();
-		} else {
-			return "Empty optional";
 		}
 	}
 };

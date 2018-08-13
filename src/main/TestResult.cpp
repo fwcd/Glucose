@@ -2,10 +2,10 @@
 
 namespace glucose {
 
-TestResult::TestResult() {
-	failed = false;
-	messagePresent = false;
-}
+TestResult::TestResult() :
+	failed(false),
+	messagePresent(false),
+	message("") {}
 
 TestResult::~TestResult() {}
 

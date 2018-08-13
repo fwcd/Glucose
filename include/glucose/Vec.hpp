@@ -17,21 +17,13 @@ template <int SIZE, typename T = double> class Vec {
 private:
 	std::vector<T> data;
 
-	explicit Vec(const std::vector<T>& values) {
-		data = std::vector<T>(values);
-	}
+	explicit Vec(const std::vector<T>& values) : data(values) {}
 public:
-	explicit Vec(std::initializer_list<T> values) {
-		data = std::vector<T>(values);
-	}
+	explicit Vec(std::initializer_list<T> values) : data(values) {}
 
-	Vec(const Vec<SIZE, T>& other) {
-		data = std::vector<T>(other.data);
-	}
+	Vec(const Vec<SIZE, T>& other) : data(other.data) {}
 
-	virtual ~Vec() {
-
-	}
+	virtual ~Vec() {}
 
 	Vec<SIZE, T> operator+(const Vec<SIZE, T>& other) {
 		return combine(other, [](T a, T b) -> T { return a + b; });
