@@ -29,14 +29,24 @@ public:
 	 * Maps the optional.
 	 */
 	template <typename R> Optional<R> map(std::function<R(T)> mapper) {
-		return Optional<R>(mapper(item));
+		if (present) {
+			return Optional<R>(mapper(item));
+		} else return Optional<R>();
 	}
 
 	bool isPresent() {
 		return present;
 	}
 
-	const T& orElse(const T& other) {
+	T orElseGet(std::function<T(void)> getter) {
+		return present ? item : getter();
+	}
+
+	T orElse(T other) {
+		return present ? item : other;
+	}
+
+	const T& orElseRef(const T& other) {
 		return present ? item : other;
 	}
 
