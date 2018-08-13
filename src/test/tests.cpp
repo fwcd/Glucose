@@ -2,7 +2,6 @@
 #include "glucose/TestRunner.hpp"
 
 #include "VecTest.hpp"
-#include "BitSequenceTest.hpp"
 #include "OptionalTest.hpp"
 
 using namespace glucose;
@@ -13,7 +12,6 @@ int main() {
 	
 	TestRunner({
 		new VecTest(),
-		new BitSequenceTest(),
 		new OptionalTest()
 	}).runAllTests();
 	
