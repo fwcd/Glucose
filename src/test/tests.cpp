@@ -3,6 +3,7 @@
 
 #include "VecTest.hpp"
 #include "OptionalTest.hpp"
+#include "StreamTest.hpp"
 
 using namespace glucose;
 
@@ -16,7 +17,8 @@ int main() {
 	
 	TestRunner({
 		new VecTest(),
-		new OptionalTest()
+		new OptionalTest(),
+		new StreamTest()
 	}).runAllTests();
 	
 	return 0;
